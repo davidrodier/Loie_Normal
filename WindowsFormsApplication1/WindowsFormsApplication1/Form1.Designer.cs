@@ -34,9 +34,9 @@
          this.label2 = new System.Windows.Forms.Label();
          this.CBX_Keep = new System.Windows.Forms.CheckBox();
          this.groupBox1 = new System.Windows.Forms.GroupBox();
-         this.radioButton1 = new System.Windows.Forms.RadioButton();
-         this.radioButton2 = new System.Windows.Forms.RadioButton();
          this.radioButton3 = new System.Windows.Forms.RadioButton();
+         this.radioButton2 = new System.Windows.Forms.RadioButton();
+         this.radioButton1 = new System.Windows.Forms.RadioButton();
          this.button1 = new System.Windows.Forms.Button();
          this.button2 = new System.Windows.Forms.Button();
          this.textBox1 = new System.Windows.Forms.TextBox();
@@ -98,16 +98,16 @@
          this.groupBox1.TabStop = false;
          this.groupBox1.Text = "Problème";
          // 
-         // radioButton1
+         // radioButton3
          // 
-         this.radioButton1.AutoSize = true;
-         this.radioButton1.Location = new System.Drawing.Point(8, 19);
-         this.radioButton1.Name = "radioButton1";
-         this.radioButton1.Size = new System.Drawing.Size(72, 17);
-         this.radioButton1.TabIndex = 0;
-         this.radioButton1.TabStop = true;
-         this.radioButton1.Text = "P ( X < a )";
-         this.radioButton1.UseVisualStyleBackColor = true;
+         this.radioButton3.AutoSize = true;
+         this.radioButton3.Location = new System.Drawing.Point(8, 65);
+         this.radioButton3.Name = "radioButton3";
+         this.radioButton3.Size = new System.Drawing.Size(90, 17);
+         this.radioButton3.TabIndex = 2;
+         this.radioButton3.TabStop = true;
+         this.radioButton3.Text = "P ( a < X < b )";
+         this.radioButton3.UseVisualStyleBackColor = true;
          // 
          // radioButton2
          // 
@@ -120,16 +120,16 @@
          this.radioButton2.Text = "P ( X > a )";
          this.radioButton2.UseVisualStyleBackColor = true;
          // 
-         // radioButton3
+         // radioButton1
          // 
-         this.radioButton3.AutoSize = true;
-         this.radioButton3.Location = new System.Drawing.Point(8, 65);
-         this.radioButton3.Name = "radioButton3";
-         this.radioButton3.Size = new System.Drawing.Size(90, 17);
-         this.radioButton3.TabIndex = 2;
-         this.radioButton3.TabStop = true;
-         this.radioButton3.Text = "P ( a < X < b )";
-         this.radioButton3.UseVisualStyleBackColor = true;
+         this.radioButton1.AutoSize = true;
+         this.radioButton1.Location = new System.Drawing.Point(8, 19);
+         this.radioButton1.Name = "radioButton1";
+         this.radioButton1.Size = new System.Drawing.Size(72, 17);
+         this.radioButton1.TabIndex = 0;
+         this.radioButton1.TabStop = true;
+         this.radioButton1.Text = "P ( X < a )";
+         this.radioButton1.UseVisualStyleBackColor = true;
          // 
          // button1
          // 
@@ -137,7 +137,7 @@
          this.button1.Name = "button1";
          this.button1.Size = new System.Drawing.Size(118, 23);
          this.button1.TabIndex = 6;
-         this.button1.Text = "button1";
+         this.button1.Text = "Calcul";
          this.button1.UseVisualStyleBackColor = true;
          // 
          // button2
@@ -146,7 +146,7 @@
          this.button2.Name = "button2";
          this.button2.Size = new System.Drawing.Size(118, 23);
          this.button2.TabIndex = 7;
-         this.button2.Text = "button2";
+         this.button2.Text = "Clear";
          this.button2.UseVisualStyleBackColor = true;
          // 
          // textBox1
