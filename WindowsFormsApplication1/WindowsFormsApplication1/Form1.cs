@@ -56,5 +56,35 @@ namespace WindowsFormsApplication1
             TXB_Reponse.Text = TXB_A.Text = TXB_B.Text = "";
             TXB_A.Select();
         }
+
+        private double getTableData(double Nb)
+        {
+            int Line = 0;
+            int Column = 0;
+            string Nb_String = "";
+            Nb *= 100;
+            Nb_String = (Nb).ToString();
+            if (Nb >= 100)
+            {
+                for (int i = 4; i > 0; i--)
+                {
+                    if (Nb_String.StartsWith(i.ToString()))
+                    {
+                        Nb -= i * 100;
+                        Nb_String = Nb.ToString();
+                        i = 0;
+                    }
+                }
+            }
+            for (int i = 9; i>0;i--)
+            {
+                if(Nb_String.StartsWith(i.ToString()))
+                {
+                    Line = i;
+                    Column = (int)Nb - i*10;
+                }
+            }
+                return Table[Line, Column];
+        }
     }
 }
