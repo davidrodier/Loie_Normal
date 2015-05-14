@@ -31,60 +31,184 @@ namespace WindowsFormsApplication1
 
         private void RDB_XPA_CheckedChanged(object sender, EventArgs e)
         {
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
             label4.Visible = TXB_A.Visible = RDB_XPA.Checked;
-
+            groupBox1.ForeColor = Color.Black;
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
         }
 
         private void RDB_XGA_CheckedChanged(object sender, EventArgs e)
         {
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
             label4.Visible = TXB_A.Visible = RDB_XGA.Checked;
+            groupBox1.ForeColor = Color.Black;
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
         }
 
         private void RDB_APXGB_CheckedChanged(object sender, EventArgs e)
         {
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
             label5.Visible = TXB_B.Visible = label4.Visible = TXB_A.Visible = RDB_APXGB.Checked;
+            groupBox1.ForeColor = Color.Black;
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
         }
 
         private void BTN_Clear_Click(object sender, EventArgs e)
         {
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
             if (!CBX_Keep.Checked)
             {
                 TXB_Ecart.Text = TXB_Moyenne.Text = "";
                 RDB_APXGB.Checked = RDB_XGA.Checked = RDB_XPA.Checked = false;
             }
 
+            TXB_A.BackColor = TXB_B.BackColor = TXB_Ecart.BackColor = TXB_Moyenne.BackColor = Color.White;
+            label1.ForeColor = label2.ForeColor = label4.ForeColor = label5.ForeColor = groupBox1.ForeColor = Color.Black;
+
             TXB_Reponse.Text = TXB_A.Text = TXB_B.Text = "";
             TXB_A.Select();
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
         }
 
-        private double getTableData(double Nb)
+        private double getTableData(double Nb, int Tester = 0)
         {
+            // -- CODE POUR ALLER CHERCHER DANS LA TABLE AVEC LA COTE Z
+            bool Negative = false;
+            if (Nb < 0)
+            {
+                Nb *= -1;
+                Negative = true;
+            }
             int Line = 0;
             int Column = 0;
             string Nb_String = "";
             Nb *= 100;
             Nb_String = (Nb).ToString();
-            if (Nb >= 100)
+            for (int i = 9; i >= 0; i--) // -- Ici on sépare le chiffre pour trouver la position dans la table
             {
-                for (int i = 4; i > 0; i--)
+                if (Nb_String.StartsWith(i.ToString()))
                 {
-                    if (Nb_String.StartsWith(i.ToString()))
+                    if (Nb < 100)
                     {
-                        Nb -= i * 100;
-                        Nb_String = Nb.ToString();
+                        Column = (Line * 10) + i;
+                        Nb -= i * 10;
+                        Line = (int)Nb;
                         i = 0;
+                    }
+                    else
+                    {
+                        Column = i;
+                        i = 9;
                     }
                 }
             }
-            for (int i = 9; i>0;i--)
+            if (Tester == 1)
             {
-                if(Nb_String.StartsWith(i.ToString()))
-                {
-                    Line = i;
-                    Column = (int)Nb - i*10;
-                }
+                if (Negative)
+                    return Table[Line, Column] + 0.5;
+                else
+                    return Table[Line, Column] - 0.5;
             }
+            else if (Tester == 2)
+            {
+                if (Negative)
+                    return Table[Line, Column] - 0.5;
+                else
+                    return Table[Line, Column] + 0.5;
+            }
+            else
                 return Table[Line, Column];
+            // -- CODE POUR ALLER CHERCHER DANS LA TABLE AVEC LA COTE Z
+        }
+
+        private void BTN_Calcul_Click(object sender, EventArgs e)
+        {
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
+            bool testing = true;
+
+            if (TXB_Moyenne.Text == "")
+            {
+                TXB_Moyenne.BackColor = Color.LightCoral;
+                label1.ForeColor = Color.LightCoral;
+                testing = false;
+            }
+
+            if (TXB_Ecart.Text == "")
+            {
+                TXB_Ecart.BackColor = Color.LightCoral;
+                label2.ForeColor = Color.LightCoral;
+                testing = false;
+            }
+
+            if (!RDB_APXGB.Checked && !RDB_XGA.Checked && !RDB_XPA.Checked)
+            {
+                groupBox1.ForeColor = Color.LightCoral;
+                testing = false;
+            }
+
+            if (TXB_A.Text == "" && (RDB_APXGB.Checked || RDB_XGA.Checked || RDB_XPA.Checked))
+            {
+                TXB_A.BackColor = Color.LightCoral;
+                label4.ForeColor = Color.LightCoral;
+                testing = false;
+            }
+
+            if (TXB_B.Text == "" && RDB_APXGB.Checked)
+            {
+                TXB_B.BackColor = Color.LightCoral;
+                label5.ForeColor = Color.LightCoral;
+                testing = false;
+            }
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
+            if (testing)
+            {
+                // -- CALCUL DE LA COTE Z
+                if (RDB_XPA.Checked)
+                {
+                    TXB_Reponse.Text = getTableData((double.Parse(TXB_A.Text) - double.Parse(TXB_Moyenne.Text)) / double.Parse(TXB_Ecart.Text), 2).ToString();
+                }
+                else if (RDB_APXGB.Checked)
+                {
+                    TXB_Reponse.Text = (getTableData((double.Parse(TXB_A.Text) - double.Parse(TXB_Moyenne.Text)) / double.Parse(TXB_Ecart.Text)) + getTableData((double.Parse(TXB_B.Text) - double.Parse(TXB_Moyenne.Text)) / double.Parse(TXB_Ecart.Text))).ToString();
+                }
+                else if (RDB_XGA.Checked)
+                {
+                    TXB_Reponse.Text = getTableData((double.Parse(TXB_A.Text) - double.Parse(TXB_Moyenne.Text)) / double.Parse(TXB_Ecart.Text), 1).ToString();
+                }
+                // -- CALCUL DE LA COTE Z
+            }
+        }
+
+        private void TXB_Moyenne_TextChanged(object sender, EventArgs e)
+        {
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
+            TXB_Moyenne.BackColor = Color.White;
+            label1.ForeColor = Color.Black;
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
+        }
+
+        private void TXB_Ecart_TextChanged(object sender, EventArgs e)
+        {
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
+            TXB_Ecart.BackColor = Color.White;
+            label2.ForeColor = Color.Black;
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
+        }
+
+        private void TXB_A_TextChanged(object sender, EventArgs e)
+        {
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
+            TXB_A.BackColor = Color.White;
+            label4.ForeColor = Color.Black;
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
+        }
+
+        private void TXB_B_TextChanged(object sender, EventArgs e)
+        {
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
+            TXB_B.BackColor = Color.White;
+            label5.ForeColor = Color.Black;
+            // -- CODE POUR LE "FEELING" DE L'INTERFACE
         }
     }
 }

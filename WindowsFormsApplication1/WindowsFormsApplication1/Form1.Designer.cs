@@ -50,10 +50,12 @@
             // 
             // TXB_Moyenne
             // 
+            this.TXB_Moyenne.BackColor = System.Drawing.Color.White;
             this.TXB_Moyenne.Location = new System.Drawing.Point(76, 19);
             this.TXB_Moyenne.Name = "TXB_Moyenne";
             this.TXB_Moyenne.Size = new System.Drawing.Size(100, 20);
             this.TXB_Moyenne.TabIndex = 0;
+            this.TXB_Moyenne.TextChanged += new System.EventHandler(this.TXB_Moyenne_TextChanged);
             // 
             // TXB_Ecart
             // 
@@ -61,6 +63,7 @@
             this.TXB_Ecart.Name = "TXB_Ecart";
             this.TXB_Ecart.Size = new System.Drawing.Size(100, 20);
             this.TXB_Ecart.TabIndex = 1;
+            this.TXB_Ecart.TextChanged += new System.EventHandler(this.TXB_Ecart_TextChanged);
             // 
             // label1
             // 
@@ -146,6 +149,7 @@
             this.BTN_Calcul.TabIndex = 4;
             this.BTN_Calcul.Text = "Calcul";
             this.BTN_Calcul.UseVisualStyleBackColor = true;
+            this.BTN_Calcul.Click += new System.EventHandler(this.BTN_Calcul_Click);
             // 
             // BTN_Clear
             // 
@@ -191,6 +195,7 @@
             this.TXB_A.Size = new System.Drawing.Size(98, 20);
             this.TXB_A.TabIndex = 2;
             this.TXB_A.Visible = false;
+            this.TXB_A.TextChanged += new System.EventHandler(this.TXB_A_TextChanged);
             // 
             // TXB_B
             // 
@@ -199,6 +204,7 @@
             this.TXB_B.Size = new System.Drawing.Size(98, 20);
             this.TXB_B.TabIndex = 3;
             this.TXB_B.Visible = false;
+            this.TXB_B.TextChanged += new System.EventHandler(this.TXB_B_TextChanged);
             // 
             // label5
             // 
